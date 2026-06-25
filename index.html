@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BreakDayz Tracker</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg width='512' height='512' viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23c)'%3E%3Cpath d='M316.82 177.088c-2.834-1.681-5.892-2.95-9.084-3.769-2.256-.577-4.564-.927-6.889-1.045-19.259-.995-35.674 13.811-36.669 33.068-.994 19.256 13.812 35.674 33.068 36.669 19.257.994 35.675-13.812 36.669-33.069.33-6.364-1.088-12.697-4.102-18.312-3.014-5.616-7.507-10.299-12.993-13.542z' fill='%23EF4823'/%3E%3Cpath d='M320.592 342.178l-.038-.131c-3.676 5.207-11.31 15.115-14.129 18.062-13.165 13.712-29.803 20.568-49.914 20.568s-36.931-6.856-50.459-20.568c-13.529-13.712-20.294-30.806-20.295-51.282-.002-20.475 6.763-37.568 20.295-51.278 12.628-12.82 28.141-19.649 46.538-20.488-6.12-8.38-9.414-18.49-9.406-28.867 0-16.335 8.025-30.812 20.308-39.759-2.48-.13-4.987-.209-7.49-.209-19.598-.021-38.984 4.057-56.913 11.973l-.014.013c-4.18 1.843-8.258 3.895-12.219 6.116v-52.469c0-39.683-32.177-71.859-71.859-71.859v246.845c-.003.058.002.117.014.174v.221c0 66.95 46.655 123.006 109.242 137.407 1.273.299 2.559.571 3.844.831 7.186 1.436 14.472 2.311 21.793 2.618h.012c10.363-6.337 18.945-12.453 20.893-13.855 42.591-30.696 55.108-73.573 49.797-94.063z' fill='%23EF4823'/%3E%3Cpath d='M392.079 346.256c0-.019 0-.043 0-.063.19-.696.383-1.402.577-2.125 2.889-11.387 4.347-23.09 4.341-34.838 0-40.715-17.266-77.392-44.867-103.131-.038 11.023-2.426 30.264-17.082 42.328-14.791 12.176-38.871 14.228-96.378 1.993 0 0 73.81 19.074 91.972 89.142 6.923 26.709-9.754 77.074-60.966 110.001 58.963-5.672 107.296-47.648 122.403-103.307z' fill='%23EF4823'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='c'%3E%3Crect width='282' height='388.096' fill='white' transform='translate(115 62)'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: #f5f5f5; color: #111; min-height: 100vh; line-height: 1.5;
+}
+.container { max-width: 960px; margin: 0 auto; padding: 24px; }
+.header { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; padding: 16px 0; border-bottom: 1px solid #e0e0e0; }
+.logo { width: 40px; height: 40px; }
+.header h1 { font-size: 22px; font-weight: 700; color: #EF4823; }
+.header span { color: #666; font-size: 14px; margin-left: auto; }
+.card { background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,.08); margin-bottom: 16px; }
+.card h2 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: #333; }
+.row { display: flex; gap: 12px; flex-wrap: wrap; }
+.stat { flex: 1; min-width: 140px; background: #fafafa; border-radius: 10px; padding: 16px; text-align: center; }
+.stat-label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: .5px; }
+.stat-value { font-size: 28px; font-weight: 700; color: #EF4823; margin-top: 4px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px;
+  border: none; font-size: 14px; font-weight: 600; cursor: pointer; transition: all .15s;
+}
+.btn-primary { background: #EF4823; color: #fff; }
+.btn-primary:hover { background: #d63d1c; }
+.btn-outline { background: transparent; color: #EF4823; border: 2px solid #EF4823; }
+.btn-outline:hover { background: #fff5f2; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { text-align: left; padding: 10px 12px; font-weight: 600; color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid #e0e0e0; }
+td { padding: 12px; border-bottom: 1px solid #f0f0f0; }
+.status { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.status-active { background: #e8f5e9; color: #2e7d32; }
+.status-break { background: #fff3e0; color: #e65100; }
+.status-offline { background: #f5f5f5; color: #999; }
+.footer { text-align: center; padding: 32px 0; color: #aaa; font-size: 13px; }
+@media (max-width: 600px) {
+  .container { padding: 16px; }
+  .row { flex-direction: column; }
+  .stat { min-width: auto; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <svg class="logo" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#h)"><path d="M316.82 177.088c-2.834-1.681-5.892-2.95-9.084-3.769-2.256-.577-4.564-.927-6.889-1.045-19.259-.995-35.674 13.811-36.669 33.068-.994 19.256 13.812 35.674 33.068 36.669 19.257.994 35.675-13.812 36.669-33.069.33-6.364-1.088-12.697-4.102-18.312-3.014-5.616-7.507-10.299-12.993-13.542z" fill="#EF4823"/><path d="M320.592 342.178l-.038-.131c-3.676 5.207-11.31 15.115-14.129 18.062-13.165 13.712-29.803 20.568-49.914 20.568s-36.931-6.856-50.459-20.568c-13.529-13.712-20.294-30.806-20.295-51.282-.002-20.475 6.763-37.568 20.295-51.278 12.628-12.82 28.141-19.649 46.538-20.488-6.12-8.38-9.414-18.49-9.406-28.867 0-16.335 8.025-30.812 20.308-39.759-2.48-.13-4.987-.209-7.49-.209-19.598-.021-38.984 4.057-56.913 11.973l-.014.013c-4.18 1.843-8.258 3.895-12.219 6.116v-52.469c0-39.683-32.177-71.859-71.859-71.859v246.845c-.003.058.002.117.014.174v.221c0 66.95 46.655 123.006 109.242 137.407 1.273.299 2.559.571 3.844.831 7.186 1.436 14.472 2.311 21.793 2.618h.012c10.363-6.337 18.945-12.453 20.893-13.855 42.591-30.696 55.108-73.573 49.797-94.063z" fill="#EF4823"/><path d="M392.079 346.256c0-.019 0-.043 0-.063.19-.696.383-1.402.577-2.125 2.889-11.387 4.347-23.09 4.341-34.838 0-40.715-17.266-77.392-44.867-103.131-.038 11.023-2.426 30.264-17.082 42.328-14.791 12.176-38.871 14.228-96.378 1.993 0 0 73.81 19.074 91.972 89.142 6.923 26.709-9.754 77.074-60.966 110.001 58.963-5.672 107.296-47.648 122.403-103.307z" fill="#EF4823"/></g>
+      <defs><clipPath id="h"><rect width="282" height="388.096" fill="#fff" transform="translate(115 62)"/></clipPath></defs>
+    </svg>
+    <h1>BreakDayz Tracker</h1>
+    <span>HRMS Time Tracking</span>
+  </div>
+
+  <div class="card">
+    <h2>Today's Overview</h2>
+    <div class="row">
+      <div class="stat">
+        <div class="stat-label">Clock In</div>
+        <div class="stat-value">09:15</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Hours Logged</div>
+        <div class="stat-value">6h 42m</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Break</div>
+        <div class="stat-value">32m</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Remaining</div>
+        <div class="stat-value">2h 18m</div>
+      </div>
+    </div>
+    <div style="margin-top: 16px;">
+      <button class="btn btn-primary" onclick="alert('Clock Out?')">Clock Out</button>
+      <button class="btn btn-outline" style="margin-left: 8px;" onclick="alert('Starting break...')">Take Break</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Team Status</h2>
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Status</th><th>Clock In</th><th>Hours</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Sarah Chen</td><td><span class="status status-active">Active</span></td><td>08:45</td><td>7h 12m</td></tr>
+        <tr><td>Mike Rivera</td><td><span class="status status-break">Break</span></td><td>08:30</td><td>5h 20m</td></tr>
+        <tr><td>Emma Watson</td><td><span class="status status-active">Active</span></td><td>09:00</td><td>6h 57m</td></tr>
+        <tr><td>James Park</td><td><span class="status status-offline">Offline</span></td><td>—</td><td>0h</td></tr>
+        <tr><td>Priya Sharma</td><td><span class="status status-active">Active</span></td><td>09:15</td><td>6h 42m</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Recent Activity</h2>
+    <table>
+      <thead>
+        <tr><th>Employee</th><th>Action</th><th>Time</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Mike Rivera</td><td>Started Break</td><td>14:32</td></tr>
+        <tr><td>Sarah Chen</td><td>Ended Break</td><td>14:15</td></tr>
+        <tr><td>Priya Sharma</td><td>Clock In</td><td>09:15</td></tr>
+        <tr><td>Emma Watson</td><td>Clock In</td><td>09:00</td></tr>
+        <tr><td>Mike Rivera</td><td>Clock In</td><td>08:30</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    &copy; 2026 BreakDayz Tracker — HRMS Time Tracking Solution
+  </div>
+</div>
+</body>
+</html>
